@@ -348,5 +348,31 @@ namespace Splines
             currentSpline = SplineType.OpenUniformBSpline;
             DrawAll();
         }
+
+        private void dataGridViewSplines_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress += new KeyPressEventHandler(dataGridViewTextBox_KeyPress);
+        }
+
+        private void dataGridViewTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            dataGridViewTextBox_KeyPress(dataGridViewSplines, sender, e);
+        }
+
+        private void dataGridViewTextBox_KeyPress(DataGridView dataGraidView, object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == ',' || e.KeyChar == '-'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void dataGridViewSplines_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (e.FormattedValue.ToString() != string.Empty && !decimal.TryParse(e.FormattedValue.ToString(), out decimal value))
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

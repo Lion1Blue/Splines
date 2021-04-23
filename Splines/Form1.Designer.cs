@@ -56,6 +56,8 @@ namespace Splines
             this.dataGridViewSplines.RowTemplate.Height = 25;
             this.dataGridViewSplines.Size = new System.Drawing.Size(272, 228);
             this.dataGridViewSplines.TabIndex = 0;
+            this.dataGridViewSplines.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridViewSplines_CellValidating);
+            this.dataGridViewSplines.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewSplines_EditingControlShowing);
             // 
             // plotViewSplines
             // 
