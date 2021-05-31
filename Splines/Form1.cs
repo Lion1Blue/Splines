@@ -82,17 +82,15 @@ namespace Splines
             controlPoints.MarkerType = MarkerType.Circle;
             controlPoints.Color = OxyColors.Red;
 
-            DrawSpline(myPlotModel);
+            DrawSpline(myPlotModel, points);
             DrawControlPoints(myPlotModel, controlPoints, points);
 
             myPlotModel.InvalidatePlot(true);
         }
 
         public delegate Point SplineFunction(double t, Point[] points, int k);
-        private void DrawSpline(PlotModel myModel)
+        private void DrawSpline(PlotModel myModel, Point[] points)
         {
-            Point[] points = GetPointsFromGrid(dataGridViewSplines);
-
             LineSeries splineLine = new LineSeries();
             splineLine.Title = currentSpline.ToString();
             splineLine.MarkerType = MarkerType.None;
@@ -195,7 +193,7 @@ namespace Splines
                 {
                     dataGridViewSplines.Rows.RemoveAt(index);
                     points = GetPointsFromGrid(dataGridViewSplines);
-                    DrawSpline(myModel);
+                    DrawSpline(myModel, points);
                     DrawControlPoints(myModel, controlPoints, points);
                     //Updates the View
                     myModel.InvalidatePlot(true);
@@ -207,7 +205,7 @@ namespace Splines
                 {
                     AppendPointToDataGridView(dataGridViewSplines, new Point(x, y));
                     points = GetPointsFromGrid(dataGridViewSplines);
-                    DrawSpline(myModel);
+                    DrawSpline(myModel, points);
                     DrawControlPoints(myModel, controlPoints, points);
                     //Updates the View
                     myModel.InvalidatePlot(true);
@@ -237,7 +235,7 @@ namespace Splines
                     dataGridViewSplines.Rows[indexOfCurrentSelectedPoint].Cells[0].Value = x.ToString();
                     dataGridViewSplines.Rows[indexOfCurrentSelectedPoint].Cells[1].Value = y.ToString();
 
-                    DrawSpline(myModel);
+                    DrawSpline(myModel, points);
                     DrawControlPoints(myModel, controlPoints, points);
                     myModel.InvalidatePlot(true);
                 }
@@ -250,7 +248,8 @@ namespace Splines
 
                 if (currentSpline == SplineType.OpenUniformBSpline)
                 {
-                    DrawSpline(myPlotModel);
+
+                    DrawSpline(myPlotModel, GetPointsFromGrid(dataGridViewSplines));
                     myPlotModel.InvalidatePlot(true);
                 }
             };
