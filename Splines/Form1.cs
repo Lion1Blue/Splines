@@ -32,6 +32,30 @@ namespace Splines
             myPlotModel.Series.Add(new LineSeries());
             plotViewSplines.Model = myPlotModel;
 
+            //Adding y - Coordinate Axes
+            myPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis
+            {
+                Position = OxyPlot.Axes.AxisPosition.Bottom,
+                ExtraGridlines = new double[] { 0 },
+                ExtraGridlineThickness = 1,
+                ExtraGridlineColor = OxyColors.Black,
+                MajorGridlineThickness = 1,
+                MinorGridlineStyle = LineStyle.Solid,
+                MajorGridlineStyle = OxyPlot.LineStyle.Solid
+            });
+
+            //Adding x - Coordinate Axes
+            myPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis
+            {
+                Position = OxyPlot.Axes.AxisPosition.Left,
+                ExtraGridlines = new double[] { 0 },
+                ExtraGridlineThickness = 1,
+                ExtraGridlineColor = OxyColors.Black,
+                MajorGridlineThickness = 1,
+                MinorGridlineStyle = LineStyle.Solid,
+                MajorGridlineStyle = OxyPlot.LineStyle.Solid
+            });
+
             DrawAll();
             InitalizeMouseEvents(myPlotModel);
 
